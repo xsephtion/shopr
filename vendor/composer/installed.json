@@ -1150,17 +1150,17 @@
     },
     {
         "name": "laravel/framework",
-        "version": "v7.0.5",
-        "version_normalized": "7.0.5.0",
+        "version": "v7.0.7",
+        "version_normalized": "7.0.7.0",
         "source": {
             "type": "git",
             "url": "https://github.com/laravel/framework.git",
-            "reference": "68ec618a3d78e6efae429ef339d8979faf82ee6e"
+            "reference": "5c3b3d9c77560b249305cbc42d0aa0a16f9e80f9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/laravel/framework/zipball/68ec618a3d78e6efae429ef339d8979faf82ee6e",
-            "reference": "68ec618a3d78e6efae429ef339d8979faf82ee6e",
+            "url": "https://api.github.com/repos/laravel/framework/zipball/5c3b3d9c77560b249305cbc42d0aa0a16f9e80f9",
+            "reference": "5c3b3d9c77560b249305cbc42d0aa0a16f9e80f9",
             "shasum": ""
         },
         "require": {
@@ -1267,7 +1267,7 @@
             "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^2.0).",
             "wildbit/swiftmailer-postmark": "Required to use Postmark mail driver (^3.0)."
         },
-        "time": "2020-03-06T13:50:22+00:00",
+        "time": "2020-03-07T14:35:34+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1857,17 +1857,17 @@
     },
     {
         "name": "nunomaduro/collision",
-        "version": "v4.1.2",
-        "version_normalized": "4.1.2.0",
+        "version": "v4.1.3",
+        "version_normalized": "4.1.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/nunomaduro/collision.git",
-            "reference": "e81356da90969139c85709f8353e59f1e7d5e01c"
+            "reference": "a430bce33d1ad07f756ea6cae9afce9ef8670b42"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nunomaduro/collision/zipball/e81356da90969139c85709f8353e59f1e7d5e01c",
-            "reference": "e81356da90969139c85709f8353e59f1e7d5e01c",
+            "url": "https://api.github.com/repos/nunomaduro/collision/zipball/a430bce33d1ad07f756ea6cae9afce9ef8670b42",
+            "reference": "a430bce33d1ad07f756ea6cae9afce9ef8670b42",
             "shasum": ""
         },
         "require": {
@@ -1888,7 +1888,7 @@
             "phpstan/phpstan": "^0.12.3",
             "phpunit/phpunit": "^8.5.1 || ^9.0"
         },
-        "time": "2020-03-03T18:17:47+00:00",
+        "time": "2020-03-07T12:46:00+00:00",
         "type": "library",
         "extra": {
             "laravel": {

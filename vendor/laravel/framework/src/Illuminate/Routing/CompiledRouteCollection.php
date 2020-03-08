@@ -70,11 +70,36 @@ class CompiledRouteCollection extends AbstractRouteCollection
             'fallback' => $route->isFallback,
             'defaults' => $route->defaults,
             'wheres' => $route->wheres,
+            'bindingFields' => $route->bindingFields(),
         ];
 
         $this->compiled = [];
 
         return $route;
+    }
+
+    /**
+     * Refresh the name look-up table.
+     *
+     * This is done in case any names are fluently defined or if routes are overwritten.
+     *
+     * @return void
+     */
+    public function refreshNameLookups()
+    {
+        //
+    }
+
+    /**
+     * Refresh the action look-up table.
+     *
+     * This is done in case any actions are overwritten with new controllers.
+     *
+     * @return void
+     */
+    public function refreshActionLookups()
+    {
+        //
     }
 
     /**
@@ -244,6 +269,7 @@ class CompiledRouteCollection extends AbstractRouteCollection
             ->setFallback($attributes['fallback'])
             ->setDefaults($attributes['defaults'])
             ->setWheres($attributes['wheres'])
+            ->setBindingFields($attributes['bindingFields'])
             ->setRouter($this->router)
             ->setContainer($this->container);
     }
