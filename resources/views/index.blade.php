@@ -35,8 +35,6 @@
 									@endif
 									<li><a href="{{ route('Product.view') }}">Products</a></li>
 									@if(!empty(Session::get('User')))
-									
-									{{Session::get('User')}}
 									<li class="hassubs active"><a href="#">Account Management</a>
 										<ul>
 										<li><a href="{{ route('Profile.view') }}">Account</a></li>
