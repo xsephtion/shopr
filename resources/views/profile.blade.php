@@ -203,6 +203,7 @@
 						<div class="section_subtitle">Say hello</div>
 						<div class="contact_form_container">
 							<form action="#" id="contact_form" class="contact_form">
+								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<div class="row">
 									@if(!Session::get('Edit'))
 										<div class="col-xl-6">
