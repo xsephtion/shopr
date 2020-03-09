@@ -37,7 +37,7 @@
 									@if(!empty(Session::get('User')))
 									<li class="hassubs active"><a href="#">Account Management</a>
 										<ul>
-										<li><a href="{{ route('register') }}">Account</a></li>
+										<li><a href="{{ route('Profile.view') }}">Account</a></li>
 										<li><a href="{{ Session::forget('User') }}">Logout</a></li>
 										</ul>
 									</li>

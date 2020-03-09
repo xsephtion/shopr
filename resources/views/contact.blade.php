@@ -26,35 +26,20 @@
 							<div class="logo"><a href="index.html">Shopr.</a></div>
 							<nav class="main_nav">
 								<ul>
-								<li class="hassubs active">
-										<a href="biz.html"> Shopr for BiZ</a>
+									@if(empty(Session::get('User')))
+										<li><a data-toggle="modal" href="#login">Login</a></li>
+										<li><a href="{{ route('register') }}">Register</a></li>
+									@endif
+									<li><a href="{{ route('Product.view') }}">Products</a></li>
+									@if(!empty(Session::get('User')))
+									<li class="hassubs active"><a href="#">Account Management</a>
 										<ul>
-											<li><a href="C:\Users\Joseph Borja\Desktop\admin\index.html">Preview</a></li>
-											<li>Preview of admin side</li>
+										<li><a href="{{ route('register') }}">Account</a></li>
+										<li><a href="{{ Session::forget('User') }}">Logout</a></li>
 										</ul>
 									</li>
-									<li class="hassubs active">
-										<a href="index.html">Home</a>
-										<ul>
-											<li><a href="categories.html">Categories</a></li>
-											<li><a href="product.html">Product</a></li>
-											<li><a href="cart.html">Cart</a></li>
-											<li><a href="checkout.html">Check out</a></li>
-											<li><a href="contact.html">Contact</a></li>
-										</ul>
-									</li>
-									<li class="hassubs">
-										<a href="categories.html">Categories</a>
-										<ul>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-											<li><a href="categories.html">Category</a></li>
-										</ul>
-									</li>
-									<li><a href="#">Accessories</a></li>
-									<li><a href="contact.html">Contact</a></li>
+									@endif
+									<li><a href="">Contact</a></li>
 									<li><a href="about.html">About</a></li>
 								</ul>
 							</nav>

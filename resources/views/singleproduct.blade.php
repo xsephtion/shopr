@@ -34,7 +34,8 @@
 										<li><a href="{{ route('register') }}">Register</a></li>
 									@endif
 									@if(!empty(Session::get('User')))
-										<li><a href="{{ route('register') }}">Account</a></li>
+										<li><a href="{{ route('Profile.view') }}">Account</a></li>
+										<li><a href="{{ Session::forget('User') }}">Logout</a></li>
 									@endif
 									<li><a href="{{ route('Product.view') }}">Products</a></li>
 									@if(!empty(Session::get('User')))

@@ -67,16 +67,17 @@
 							<div class="logo"><a href="{{ route('index') }}">Shopr.</a></div>
 							<nav class="main_nav">
 								<ul>
-									@if(empty(Session::get('User')))
-										<li><a data-toggle="modal" href="#login">Login</a></li>
-										<li><a href="{{ route('register') }}">Register</a></li>
-									@endif
-									@if(!empty(Session::get('User')))
-										<li><a href="{{ Session::forget('User') }}">Account</a></li>
-									@endif
-									<li><a href="{{ route('Product.view') }}">Products</a></li>
-									@if(!empty(Session::get('User')))
-									<li class="hassubs active"><a href="#">Account Management</a>
+										@if(empty(Session::get('User')))
+											<li><a data-toggle="modal" href="#login">Login</a></li>
+											<li><a href="{{ route('register') }}">Register</a></li>
+										@endif
+										@if(!empty(Session::get('User')))
+											<li><a href="{{ route('Profile.view') }}">Account</a></li>
+											<li><a href="{{ Session::forget('User') }}">Logout</a></li>
+										@endif
+										<li><a href="{{ route('Product.view') }}">Products</a></li>
+										@if(!empty(Session::get('User')))
+										<li class="hassubs active"><a href="#">Account Management</a>
 										<ul>
 										<li><a href="{{ route('register') }}">Account</a></li>
 										<li><a href="{{ Session::forget('User') }}">Logout</a></li>

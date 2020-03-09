@@ -36,3 +36,5 @@ Route::get('/success', 'SessionController@accessSessionData')->name('Success.sto
 Route::get('/success', 'SessionController@accessSessionData')->name('Success.store');
 Route::get('/products', 'ProductController@index') -> name('Product.view');
 Route::get('/product/{post_id}', 'SingleProductController@index') -> name('SProduct.view');
+
+Route::get('profile', 'ProfileController@index') -> name('Profile.view');
