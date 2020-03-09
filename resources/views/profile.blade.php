@@ -40,11 +40,6 @@
 									<li><a href="">Contact</a></li>
 									<li><a href="about.html">About</a></li>
 								</ul>
-									</li>
-									<li><a href="#">Accessories</a></li>
-									<li><a href="contact.html">Contact</a></li>
-									<li><a href="about.html">About</a></li>
-								</ul>
 							</nav>
 							<div class="header_extra ml-auto">
 								<div class="shopping_cart">
