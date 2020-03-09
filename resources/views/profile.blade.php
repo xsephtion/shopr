@@ -205,20 +205,20 @@
 							<form action="#" id="contact_form" class="contact_form">
 								<input type="hidden" name="_token" value="{{ csrf_token() }}">
 								<div class="row">
-									@if(!Session::get('Edit'))
+									<!-- @if(!Session::get('Edit')) -->
 										<div class="col-xl-6">
 											<label for="contact_name">Full Name</label>
-											<input type="text" id="contact_name" class="contact_input" placeholder="{{Session::get('User')[0]['fname']}}" disabled>
+											<input type="text" id="contact_name" class="contact_input" placeholder="admin" disabled>
 											<label for="contact_last_name">Email</label>
-											<input type="text" id="contact_last_name" class="contact_input" placeholder="{{Session::get('User')[0]['email']}}" disabled>
+											<input type="text" id="contact_last_name" class="contact_input" placeholder="admin@admin.com" disabled>
 											<label for="contact_last_name">Phone Number</label>
-											<input type="text" id="contact_last_name" class="contact_input" placeholder="{{Session::get('User')[0]['pnum']}}" disabled>
+											<input type="text" id="contact_last_name" class="contact_input" placeholder="12345678901" disabled>
 											<label for="contact_last_name">Username</label>
-											<input type="text" id="contact_last_name" class="contact_input" placeholder="{{Session::get('User')[0]['username']}}" disabled>
+											<input type="text" id="contact_last_name" class="contact_input" placeholder="admin" disabled>
 											<label for="contact_last_name">Password</label>
-											<input type="text" id="contact_last_name" class="contact_input" placeholder="{{Session::get('User')[0]['password']}}" disabled>
+											<input type="password" id="contact_last_name" class="contact_input" placeholder="" disabled>
 										</div>
-									@endif
+									<!-- @endif
 									@if(Session::get('Edit'))
 									<div class="col-xl-6">
 										<label for="contact_name">Full Name</label>
@@ -232,7 +232,7 @@
 										<label for="contact_last_name">Password</label>
 										<input type="text" id="contact_last_name" class="contact_input" placeholder="{{Session::get('User')[0]['password']}}" >
 									</div>
-									@endif
+									@endif -->
 									<div class="col-xl-6 last_name_col">
 									</div>
 								</div>
