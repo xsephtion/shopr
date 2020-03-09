@@ -21,7 +21,7 @@
 				<div class="row">
 					<div class="col">
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
-							<div class="logo"><a href="index.html">Shopr.</a></div>
+							<div class="logo"><a href="{{ route('index') }}">Shopr.</a></div>
 							<nav class="main_nav">
 								<ul>
 									@if(empty(Session::get('User')))
