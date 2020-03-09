@@ -59,7 +59,7 @@ class LoginController extends Controller
             echo '<script language="javascript">';
             echo 'alert("Login Successful")';
             echo '</script>';
-            Session::put('User', $query_details);
+            Session::push('User', $query_details);
             return view('index', ['products'=>$products]);
         }
     }
