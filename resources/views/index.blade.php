@@ -29,13 +29,14 @@
 							<div class="logo"><a href="{{ route('index') }}">Shopr.</a></div>
 							<nav class="main_nav">
 								<ul>
-								{{Session::get('User')}}
 									@if(empty(Session::get('User')))
 										<li><a data-toggle="modal" href="#login">Login</a></li>
 										<li><a href="{{ route('register') }}">Register</a></li>
 									@endif
 									<li><a href="{{ route('Product.view') }}">Products</a></li>
 									@if(!empty(Session::get('User')))
+									
+									{{Session::get('User')}}
 									<li class="hassubs active"><a href="#">Account Management</a>
 										<ul>
 										<li><a href="{{ route('Profile.view') }}">Account</a></li>
