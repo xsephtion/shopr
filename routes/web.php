@@ -14,27 +14,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::get('/', function () {
-//     return view('welcome');
+//     $query = DB::table('products')->get();
+//     $query = json_encode($query);
+//     $query = json_decode($query);
+//     //dd(Session::get('user'));
+//     return view('home', ['products' => $query]);
 // });
 
-// Route::post('/', function() {
-//     return view('welcome');
-// });
-
-//Route::get('/', 'UserController@create')->name('index');
-
-Route::get('/', function(){
-    $query = DB::table('products')->get();
-    $query = json_encode($query);
-    $query = json_decode($query);
-    return view('index', ['products' => $query]);
-})->name('index');
-Route::get('register', 'UserController@create')->name('register');
-Route::post('register', 'UserController@store') -> name('Register.store');
-Route::post('/', 'LoginController@store') -> name('Login.store');
-Route::get('/success', 'SessionController@accessSessionData')->name('Success.store');
-Route::get('/success', 'SessionController@accessSessionData')->name('Success.store');
+Auth::routes();
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/products', 'ProductController@index') -> name('Product.view');
 Route::get('/product/{post_id}', 'SingleProductController@index') -> name('SProduct.view');
+// Route::get('profile', 'ProfileController@index') -> name('Profile.view')->middleware('web');
 
-Route::get('profile', 'ProfileController@index') -> name('Profile.view');
+// Route::group(['middleware' => ['web']], function(){
+//     Route::get('/', function () {
+//         $query = DB::table('products')->get();
+//         $query = json_encode($query);
+//         $query = json_decode($query);
+//         //dd(Session::get('user'));
+//         return view('home', ['products' => $query]);
+//     });
+//     Auth::routes();
+//     Route::get('/home', 'HomeController@index')->name('home');
+//     Route::get('/products', 'ProductController@index') -> name('Product.view');
+//     Route::get('/product/{post_id}', 'SingleProductController@index') -> name('SProduct.view');
+// });

@@ -26,7 +26,7 @@
 				<div class="row">
 					<div class="col">
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
-							<div class="logo"><a href="{{ route('index') }}">Shopr.</a></div>
+							<div class="logo"><a href="{{ route('home') }}">Shopr.</a></div>
 							<nav class="main_nav">
                                 <ul>
 									@if(empty(Session::get('User')))
@@ -134,7 +134,7 @@
                 </button>
             </div>
             <div class="modal-body">
-            <form class="form-a contactForm" action="{{ route('Login.store') }}" method="POST" role="form">  
+            <form class="form-a contactForm" action="{{ route('home') }}" method="POST" role="form">  
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
                     <div id="errormessage"></div>
                       <div class="row">

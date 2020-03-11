@@ -4,8 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Session;
 class ProductController extends Controller
 {
+
+
+
+    public function __construct()
+    {
+        $this->middleware('web');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +24,7 @@ class ProductController extends Controller
         $query = DB::table('products')->get();
         $query = json_encode($query);
         $query = json_decode($query);
+        //dd(Session::get('user'));
         return view('product', ['products' => $query]);
     }
 
