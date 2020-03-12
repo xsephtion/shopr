@@ -39,12 +39,12 @@
 										<li><a data-toggle="modal" href="#login">Login</a></li>
 										<li><a href="{{ route('register') }}">Register</a></li>
 									@endif
-									<li><a href="{{ route('Product.view') }}">Products</a></li>
+									<li><a href="{{ URL::route('Product.view') }}">Products</a></li>
 									@if(Auth::check())
 									<li class="hassubs active"><a href="#">Account Management</a>
 										<ul>
-										<li><a href="{{ route('home') }}">Account</a></li>
-										<li><a href="{{ Session::flush() }}">Logout</a></li>
+										<li><a href="{{ route('profile') }}">Account</a></li>
+										<li><a href="{{ route('logout') }}">Logout</a></li>
 										</ul>
 									</li>
 									@endif
@@ -54,7 +54,7 @@
 							</nav>
 							<div class="header_extra ml-auto">
 								<div class="shopping_cart">
-									<a href="cart.html">
+									<a href="{{ route('Cart.view') }}">
 										<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 												 viewBox="0 0 489 489" style="enable-background:new 0 0 489 489;" xml:space="preserve">
 											<g>

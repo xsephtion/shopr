@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use DB;
 class SingleProductController extends Controller
@@ -11,6 +12,9 @@ class SingleProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    
+    
     public function index($post_id)
     {
         $recommend = DB::table('products')->get();

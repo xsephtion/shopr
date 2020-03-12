@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use DB;
 use Session;
 class ProductController extends Controller
 {
-
-
-
-    public function __construct()
-    {
-        $this->middleware('web');
-    }
+    
+   
     /**
      * Display a listing of the resource.
      *

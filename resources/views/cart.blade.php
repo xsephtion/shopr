@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Register</title>
+<title>Cart</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Shopr project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
 <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="styles/contact.css">
-<link rel="stylesheet" type="text/css" href="styles/contact_responsive.css">
+<link rel="stylesheet" type="text/css" href="styles/cart.css">
+<link rel="stylesheet" type="text/css" href="styles/cart_responsive.css">
 </head>
 <body>
 
@@ -23,12 +23,22 @@
 				<div class="row">
 					<div class="col">
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
-							<div class="logo"><a href="{{ route('index') }}">Shopr.</a></div>
+							<div class="logo"><a href="#">Shopr.</a></div>
 							<nav class="main_nav">
-                            <ul>
-                                    <li><a data-toggle="modal" href="#login">Login</a></li>
-                                    <li><a href="{{ route('register') }}">Register</a></li>
+                                <ul>
+									@if(!Auth::check())
+									<li><a data-toggle="modal" href="{{ route('home') }}">Login</a></li>
+									<li><a href="{{ route('register') }}">Register</a></li>
+									@endif
 									<li><a href="{{ route('Product.view') }}">Products</a></li>
+									@if(Auth::check())
+									<li class="hassubs active"><a href="#">Account Management</a>
+									<ul>
+                                        <li><a href="{{ route('register') }}">Account</a></li>
+                                        <li><a href="{{ route('logout', ['user' => Auth::user()]) }}">Logout</a></li>
+									</ul>
+									</li>
+									@endif
 									<li><a href="">Contact</a></li>
 									<li><a href="about.html">About</a></li>
 								</ul>
@@ -103,43 +113,7 @@
 			</ul>
 		</div>
 	</header>
-	  <!--/ MODAL Sign In /-->
 
-      <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-            <form class="form-a contactForm" action="{{ route('Login.store') }}" method="POST" role="form">  
-                <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
-                    <div id="errormessage"></div>
-                      <div class="row">
-                        <div class="col-md-6 mb-3">
-                          <div class="form-group">
-                            <input type="text" name="username" class="form-control form-control-lg form-control-a" placeholder="Username" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                          </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                          <div class="form-group">
-                            <input name="password" type="password" class="form-control form-control-lg form-control-a" placeholder="Password" data-rule="password">
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-                          <button type="submit" class="btn btn-light" value="Submit" ><span>Login</span></button>
-                        </div>
-                    </div>
-                  </form>
-              </div>
-            </div>
-          </div>
-        </div>
-    
-      <!--/ MODAL END /-->
 	<!-- Menu -->
 
 	<div class="menu menu_mm trans_300">
@@ -194,7 +168,7 @@
 
 	<div class="home">
 		<div class="home_container">
-			<div class="home_background" style="background-image:url(images/contact.jpg)"></div>
+			<div class="home_background" style="background-image:url(images/cart.jpg)"></div>
 			<div class="home_content_container">
 				<div class="container">
 					<div class="row">
@@ -202,8 +176,9 @@
 							<div class="home_content">
 								<div class="breadcrumbs">
 									<ul>
-										<li><a href="{{ route('index') }}">Home</a></li>
-										<li>Register</li>
+										<li><a href="index.html">Home</a></li>
+										<li><a href="categories.html">Categories</a></li>
+										<li>Shopping Cart</li>
 									</ul>
 								</div>
 							</div>
@@ -212,76 +187,133 @@
 				</div>
 			</div>
 		</div>
-    </div>
-    
-	<div class="contact">
+	</div>
+
+	<!-- Cart Info -->
+
+	<div class="cart_info">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-8 contact_col">
-					<div class="get_in_touch">
-						<div class="section_title">Register</div>
-						<div class="section_subtitle">All fields are Required</div>
-						<div class="contact_form_container">
-							<form action="{{ route('Register.store') }}" method="POST" id="contact_form" class="contact_form">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-								<div class="row">
-									<div class="col-xl-6">
-										<!-- Name -->
-										<label for="contact_name">Full Name*</label>
-                                        <input type="text" id="fname" name="fname" class="contact_input" required="required">
-                                        
-										<label for="contact_last_name">Email*</label>
-                                        <input type="text" id="email" name="email" class="contact_input" required="required">
+				<div class="col">
+					<!-- Column Titles -->
+					<div class="cart_info_columns clearfix">
+						<div class="cart_info_col cart_info_col_product">Product</div>
+						<div class="cart_info_col cart_info_col_price">Price</div>
+						<div class="cart_info_col cart_info_col_quantity">Quantity</div>
+						<div class="cart_info_col cart_info_col_total">Total</div>
+					</div>
+				</div>
+			</div>
+			<div class="row cart_items_row">
+				<div class="col">
 
-                                        <label for="contact_last_name">Phone Number*</label>
-                                        <input type="text" id="pnum" name="pnum"  class="contact_input" required="required">
-
-                                        <label for="contact_last_name">Username*</label>
-                                        <input type="text" id="username" name="username"  class="contact_input" required="required">
-
-                                        <label for="contact_last_name">Password*</label>
-										<input type="password" id="password" name="password" class="contact_input" required="required">
+					<!-- Cart Item -->
+					<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
+						<!-- Name -->
+						<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">
+							<div class="cart_item_image">
+								<div><img src="images/cart_1.jpg" alt=""></div>
+							</div>
+							<div class="cart_item_name_container">
+								<div class="cart_item_name"><a href="#">{{$items[0]->product_name}}</a></div>
+							</div>
+						</div>
+						<!-- Price -->
+						<div class="cart_item_price">₱{{$items[0]->price}}</div>
+						<!-- Quantity -->
+						<div class="cart_item_quantity">
+							<div class="product_quantity_container">
+								<div class="product_quantity clearfix">
+									<span>Qty</span>
+									<input id="quantity_input" type="text" pattern="[0-9]*" value="{{$items[0]->quantity}}">
+									<div class="quantity_buttons">
+										<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
+										<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
 									</div>
 								</div>
-								<button class="button contact_button" type="submit" value="Submit"><span>Register</span></button>
+							</div>
+						</div>
+						<!-- Total -->
+						<div class="cart_item_total">{{$items[0]->price}}</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="row row_cart_buttons">
+				<div class="col">
+					<div class="cart_buttons d-flex flex-lg-row flex-column align-items-start justify-content-start">
+						<div class="button continue_shopping_button"><a href="#">Continue shopping</a></div>
+						<div class="cart_buttons_right ml-lg-auto">
+							<div class="button clear_cart_button"><a href="#">Clear cart</a></div>
+							<div class="button update_cart_button"><a href="#">Update cart</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row row_extra">
+				<div class="col-lg-4">
+					
+					<!-- Delivery -->
+					<div class="delivery">
+						<div class="section_title">Shipping method</div>
+						<div class="section_subtitle">Select the one you want</div>
+						<div class="delivery_options">
+							<label class="delivery_option clearfix">Next day delivery
+								<input type="radio" name="radio">
+								<span class="checkmark"></span>
+								<span class="delivery_price">$4.99</span>
+							</label>
+							<label class="delivery_option clearfix">Standard delivery
+								<input type="radio" name="radio">
+								<span class="checkmark"></span>
+								<span class="delivery_price">$1.99</span>
+							</label>
+							<label class="delivery_option clearfix">Personal pickup
+								<input type="radio" checked="checked" name="radio">
+								<span class="checkmark"></span>
+								<span class="delivery_price">Free</span>
+							</label>
+						</div>
+					</div>
+
+					<!-- Coupon Code -->
+					<div class="coupon">
+						<div class="section_title">Coupon code</div>
+						<div class="section_subtitle">Enter your coupon code</div>
+						<div class="coupon_form_container">
+							<form action="#" id="coupon_form" class="coupon_form">
+								<input type="text" class="coupon_input" required="required">
+								<button class="button coupon_button"><span>Apply</span></button>
 							</form>
 						</div>
 					</div>
 				</div>
 
-				<!-- Contact Info -->
-				<div class="col-lg-3 offset-xl-1 contact_col">
-					<div class="contact_info">
-						<div class="contact_info_section">
-							<div class="contact_info_title">Marketing</div>
+				<div class="col-lg-6 offset-lg-2">
+					<div class="cart_total">
+						<div class="section_title">Cart total</div>
+						<div class="section_subtitle">Final info</div>
+						<div class="cart_total_container">
 							<ul>
-								<li>Phone: <span>+63 921 176 6970</span></li>
-								<li>Email: <span>wakanda@gmail.com</span></li>
+								<li class="d-flex flex-row align-items-center justify-content-start">
+									<div class="cart_total_title">Subtotal</div>
+									<div class="cart_total_value ml-auto">{{$items[0]->price}}</div>
+								</li>
+								<li class="d-flex flex-row align-items-center justify-content-start">
+									<div class="cart_total_title">Shipping</div>
+									<div class="cart_total_value ml-auto">Free</div>
+								</li>
+								<li class="d-flex flex-row align-items-center justify-content-start">
+									<div class="cart_total_title">Total</div>
+									<div class="cart_total_value ml-auto">$790.90</div>
+								</li>
 							</ul>
 						</div>
-						<div class="contact_info_section">
-							<div class="contact_info_title">Shippiing & Returns</div>
-							<ul>
-								<li>Phone: <span>+63 921 176 6970</span></li>
-								<li>Email: <span>wakanda@gmail.com</span></li>
-							</ul>
-						</div>
-						<div class="contact_info_section">
-							<div class="contact_info_title">Information</div>
-							<ul>
-								<li>Phone: <span>+63 921 176 6970</span></li>
-								<li>Email: <span>wakanda@gmail.com</span></li>
-							</ul>
-						</div>
+						<div class="button checkout_button"><a href="#">Proceed to checkout</a></div>
 					</div>
 				</div>
 			</div>
-			<div class="row map_row">
-				<div class="col">
-
-				</div>
-			</div>
-		</div>
+		</div>		
 	</div>
 
 	<!-- Footer -->
@@ -294,8 +326,7 @@
 				<div class="col">
 					<div class="footer_content d-flex flex-lg-row flex-column align-items-center justify-content-lg-start justify-content-center">
 						<div class="footer_logo"><a href="#">Shopr.</a></div>
-						<div class="copyright ml-auto mr-auto">
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved <i class="fa fa-heart-o" aria-hidden="true"></i> by <a target="_blank">Team Building</a></div>
+						<div class="copyright ml-auto mr-auto">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved <i class="fa fa-heart-o" aria-hidden="true"></i> by <a target="_blank">Team Building</a></div>
 						<div class="footer_social ml-lg-auto">
 							<ul>
 								<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
@@ -320,7 +351,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="plugins/greensock/animation.gsap.min.js"></script>
 <script src="plugins/greensock/ScrollToPlugin.min.js"></script>
 <script src="plugins/easing/easing.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
-<script src="js/contact.js"></script>
+<script src="plugins/parallax-js-master/parallax.min.js"></script>
+<script src="js/cart.js"></script>
 </body>
 </html>

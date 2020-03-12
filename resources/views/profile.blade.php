@@ -21,19 +21,19 @@
 				<div class="row">
 					<div class="col">
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
-							<div class="logo"><a href="{{ route('index') }}">Shopr.</a></div>
+							<div class="logo"><a href="{{ route('home') }}">Shopr.</a></div>
 							<nav class="main_nav">
 								<ul>
-									@if(empty(Session::get('User')))
+									@if(!Auth::check())
 										<li><a data-toggle="modal" href="#login">Login</a></li>
 										<li><a href="{{ route('register') }}">Register</a></li>
 									@endif
 									<li><a href="{{ route('Product.view') }}">Products</a></li>
-									@if(!empty(Session::get('User')))
+									@if(Auth::check())
 									<li class="hassubs active"><a href="#">Account Management</a>
 										<ul>
-										<li><a href="{{ route('Profile.view') }}">Account</a></li>
-										<li><a href="{{ Session::forget('User') }}">Logout</a></li>
+										<li><a href="{{ route('profile') }}">Account</a></li>
+										<li><a href="{{ route('logout') }}">Logout</a></li>
 										</ul>
 									</li>
 									@endif
@@ -174,8 +174,8 @@
 							<div class="home_content">
 								<div class="breadcrumbs">
 									<ul>
-										<li><a href="index.html">Home</a></li>
-										<li>Contact</li>
+										<li><a href="{{ route('home') }}">Home</a></li>
+										<li>Edit Profilec</li>
 									</ul>
 								</div>
 							</div>
@@ -203,13 +203,13 @@
 									@if(!Session::has('Edit'))
 										<div class="col-xl-6">
 											<label for="contact_name">Full Name</label>
-											<input type="text" id="contact_name" class="contact_input" placeholder="{{Session::get('User')->fname}}" disabled>
+											<input type="text" id="contact_name" class="contact_input" placeholder="{{Auth::user()->fname}}" disabled>
 											<label for="contact_last_name">Email</label>
-											<input type="text" id="contact_last_name" class="contact_input" placeholder="{{Session::get('User')->email}}" disabled>
+											<input type="text" id="contact_last_name" class="contact_input" placeholder="{{Auth::user()->email}}" disabled>
 											<label for="contact_last_name">Phone Number</label>
-											<input type="text" id="contact_last_name" class="contact_input" placeholder="{{Session::get('User')->pnum}}" disabled>
+											<input type="text" id="contact_last_name" class="contact_input" placeholder="{{Auth::user()->pnum}}" disabled>
 											<label for="contact_last_name">Username</label>
-											<input type="text" id="contact_last_name" class="contact_input" placeholder="{{Session::get('User')->username}}" disabled>
+											<input type="text" id="contact_last_name" class="contact_input" placeholder="{{Auth::user()->username}}" disabled>
 											<label for="contact_last_name">Password</label>
 											<input type="password" id="contact_last_name" class="contact_input" placeholder="" disabled>
 										</div>
@@ -217,13 +217,13 @@
 									@if(Session::has('Edit'))
 									<div class="col-xl-6">
 											<label for="contact_name">Full Name</label>
-											<input type="text" id="contact_name" class="contact_input" placeholder="{{Session::get('User')->fname}}" >
+											<input type="text" id="contact_name" class="contact_input" placeholder="{{Auth::user()->fname}}" >
 											<label for="contact_last_name">Email</label>
-											<input type="text" id="contact_last_name" class="contact_input" placeholder="{{Session::get('User')->email}}" >
+											<input type="text" id="contact_last_name" class="contact_input" placeholder="{{Auth::user()->email}}" >
 											<label for="contact_last_name">Phone Number</label>
-											<input type="text" id="contact_last_name" class="contact_input" placeholder="{{Session::get('User')->pnum}}" >
+											<input type="text" id="contact_last_name" class="contact_input" placeholder="{{Auth::user()->pnum}}" >
 											<label for="contact_last_name">Username</label>
-											<input type="text" id="contact_last_name" class="contact_input" placeholder="{{Session::get('User')->username}}" >
+											<input type="text" id="contact_last_name" class="contact_input" placeholder="{{Auth::user()->username}}" >
 											<label for="contact_last_name">Password</label>
 											<input type="password" id="contact_last_name" class="contact_input" placeholder="" >
 									</div>
@@ -231,53 +231,14 @@
 									<div class="col-xl-6 last_name_col">
 									</div>
 								</div>
-								<button class="button contact_button" onClick="{{ Session::put('Edit', true)}}"><span>Edit Profile</span></button>
+								<button class="button contact_button" onClick="{{ route('profile', ['Edit' => 'true']) }}"><span>Edit Profile</span></button>
 							</form>
 						</div>
 					</div>
 				</div>
 
-				<!-- Contact Info -->
-				<div class="col-lg-3 offset-xl-1 contact_col">
-					<div class="contact_info">
-						<div class="contact_info_section">
-							<div class="contact_info_title">Marketing</div>
-							<ul>
-								<li>Phone: <span>+53 345 7953 3245</span></li>
-								<li>Email: <span>yourmail@gmail.com</span></li>
-							</ul>
-						</div>
-						<div class="contact_info_section">
-							<div class="contact_info_title">Shippiing & Returns</div>
-							<ul>
-								<li>Phone: <span>+53 345 7953 3245</span></li>
-								<li>Email: <span>yourmail@gmail.com</span></li>
-							</ul>
-						</div>
-						<div class="contact_info_section">
-							<div class="contact_info_title">Information</div>
-							<ul>
-								<li>Phone: <span>+53 345 7953 3245</span></li>
-								<li>Email: <span>yourmail@gmail.com</span></li>
-							</ul>
-						</div>
-					</div>
-				</div>
 			</div>
-			<div class="row map_row">
-				<div class="col">
-
-					<!-- Google Map -->
-					<div class="map">
-						<div id="google_map" class="google_map">
-							<div class="map_container">
-								<div id="map"></div>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
+			
 		</div>
 	</div>
 

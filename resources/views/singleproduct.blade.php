@@ -29,20 +29,16 @@
 							<div class="logo"><a href="{{ route('home') }}">Shopr.</a></div>
 							<nav class="main_nav">
                                 <ul>
-									@if(empty(Session::get('User')))
+									@if(!Auth::check())
 										<li><a data-toggle="modal" href="#login">Login</a></li>
 										<li><a href="{{ route('register') }}">Register</a></li>
 									@endif
-									@if(!empty(Session::get('User')))
-										<li><a href="{{ route('Profile.view') }}">Account</a></li>
-										<li><a href="{{ Session::forget('User') }}">Logout</a></li>
-									@endif
 									<li><a href="{{ route('Product.view') }}">Products</a></li>
-									@if(!empty(Session::get('User')))
+									@if(Auth::check())
 									<li class="hassubs active"><a href="#">Account Management</a>
 										<ul>
-										<li><a href="{{ route('register') }}">Account</a></li>
-										<li><a href="{{ Session::forget('User') }}">Logout</a></li>
+										<li><a href="{{ route('profile') }}">Account</a></li>
+										<li><a href="{{ route('logout') }}">Logout</a></li>
 										</ul>
 									</li>
 									@endif
@@ -251,8 +247,8 @@
 					<div class="details_content">
                         
 						<div class="details_name">{{ $product[0]->product_name }}</div>
-						<div class="details_discount">₱{{$discount = $product[0]->price + rand(1999,2999)}}</div>
-						<div class="details_price">₱{{$product[0]->price}}</div>
+						<div class="details_discount">₱{{ $discount = $product[0]->price+ (0.10 * $product[0]->price )}}</div>
+						<div class="details_price">₱{{ $product[0]->price }}</div>
 
 						<!-- In Stock -->
 						<div class="in_stock_container">
@@ -267,13 +263,25 @@
 						<div class="product_quantity_container">
 							<div class="product_quantity clearfix">
 								<span>Qty</span>
-								<input id="quantity_input" type="text" pattern="[0-9]*" value="1">
+								<input id="quantity_input" type="text" name="quantity" pattern="[0-9]*" value="1" method="POST">
 								<div class="quantity_buttons">
 									<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
 									<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
 								</div>
 							</div>
-							<div class="button cart_button"><a href="#">Add to cart</a></div>
+							@if(Auth::check())
+							<?php
+							$serializeARR = ['productid' => $product[0]->id,'customername' => Auth::user()->fname, 'product_name' => $product[0]->product_name, 'price' => ($product[0]->price + (0.10 * $product[0]->price)), 'quantity' => $_GET['quantity'] ?? ''];
+							Session::put('Cart', $serializeARR);
+							?>
+							@endif
+							@if(!Auth::check())
+							<?php
+							$serializeARR = ['productid' => $product[0]->id,'customername' ?? '' => Auth::user()->fname, 'product_name' => $product[0]->product_name, 'price' => ($product[0]->price + (0.10 * $product[0]->price)), 'quantity' => $_GET['quantity'] ?? ''];
+							Session::put('Cart', $serializeARR);
+							?>
+							@endif
+							<div class="button cart_button"><a href="{{ route('Checkout.store') }}">Add to cart</a></div>
 						</div>
 
 						<!-- Share -->

@@ -67,7 +67,6 @@
 							<div class="logo"><a href="{{ route('home') }}">Shopr.</a></div>
 							<nav class="main_nav">
 								<ul>
-										{{dd(Auth::check())}}
 										@if(!Auth::check())
 										<li><a data-toggle="modal" href="#login">Login</a></li>
 										<li><a href="{{ route('register') }}">Register</a></li>
@@ -77,7 +76,7 @@
 										<li class="hassubs active"><a href="#">Account Management</a>
 										<ul>
 										<li><a href="{{ route('register') }}">Account</a></li>
-										<li><a href="{{ Session::forget('user') }}">Logout</a></li>
+										<li><a href="{{ route('logout', ['user' => Auth::user()]) }}">Logout</a></li>
 										</ul>
 									</li>
 									@endif
