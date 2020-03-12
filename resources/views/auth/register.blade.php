@@ -248,7 +248,6 @@
 								</div>
 								<button class="button contact_button" type="submit" value="Submit"><span>Register</span></button>
 							</form>
-                            {{dd($errors)}}
 						</div>
 					</div>
 				</div>
